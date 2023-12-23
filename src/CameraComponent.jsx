@@ -3,6 +3,20 @@ import React, { useEffect, useRef } from 'react';
 const CameraComponent = () => {
   const videoRef = useRef(null);
 
+  const enterFullScreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        /* Safari */
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        /* IE11 */
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
+
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -12,11 +26,15 @@ const CameraComponent = () => {
     });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        enterFullScreen()
       }
     } catch (error) {
       console.error('Error accessing the camera:', error);
     }
   };
+
+
+  
 
   useEffect(()=>{
     startCamera()
