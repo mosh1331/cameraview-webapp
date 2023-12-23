@@ -6,10 +6,10 @@ const CameraComponent = () => {
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: { exact: "environment" } // Use the rear camera
-        }
-      });
+      video: {
+        facingMode: { exact: "environment" } // Use the rear camera
+      }
+    });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
@@ -19,9 +19,13 @@ const CameraComponent = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <button onClick={startCamera}>Start Camera</button>
-      <video ref={videoRef} width="400" height="300" autoPlay></video>
+      <video
+        ref={videoRef}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        autoPlay
+      ></video>
     </div>
   );
 };
