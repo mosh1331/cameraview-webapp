@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const CameraComponent = () => {
   const videoRef = useRef(null);
@@ -18,9 +18,12 @@ const CameraComponent = () => {
     }
   };
 
+  useEffect(()=>{
+    startCamera()
+  },[])
+
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
-      <button onClick={startCamera}>Start Camera</button>
+    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden'}}>
       <video
         ref={videoRef}
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}

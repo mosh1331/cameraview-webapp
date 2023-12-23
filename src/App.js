@@ -5,7 +5,6 @@ import CameraComponent from './CameraComponent';
 function App() {
   return (
     <div className="App">
-      <h1>React PWA Camera App</h1>
       <CameraComponent />
     </div>
   );
